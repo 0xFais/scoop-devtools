@@ -9,7 +9,7 @@
   "depends": "main/dotnet-sdk",
   "architecture": {
     "64bit": {
-      "url": "https://github.com/YOUR_USERNAME/scoop-devtools/releases/download/v1.1.0/portable-msvc-1.1.0.zip",
+      "url": "https://github.com/0xfais/scoop-devtools/releases/download/v1.1.0/portable-msvc-1.1.0.zip",
       "hash": "44873a4d7bb12c68fb60e771b9de8c45078ae756c088c6b77a7a5996bdca9870"
     }
   },
