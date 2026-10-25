@@ -1,0 +1,36 @@
+{
+  "version": "1.0.0",
+  "description": "Portable Microsoft C/C++ compiler and Windows SDK, installed with the DevTools native C# downloader.",
+  "homepage": "https://visualstudio.microsoft.com/vs/features/cplusplus/",
+  "license": {
+    "identifier": "Proprietary",
+    "url": "https://visualstudio.microsoft.com/license-terms/"
+  },
+  "depends": "main/dotnet-sdk",
+  "architecture": {
+    "64bit": {
+      "url": "https://github.com/0xfais/scoop-devtools/releases/download/v1.0.0/portable-msvc-1.0.0.zip",
+      "hash": "db680247219e52da871c2d7732d9379c9d205cbe324d6087170fd48e6549aca6"
+    }
+  },
+  "installer": {
+    "script": [
+      "Write-Host 'This package downloads Microsoft MSVC and Windows SDK under the Microsoft license terms:'",
+      "Write-Host 'https://visualstudio.microsoft.com/license-terms/'",
+      "& \"$dir\\portable-msvc.cmd\" install --accept-license --root \"$dir\\toolchain\" --host x64 --targets x64 --clean",
+      "if ($LASTEXITCODE -ne 0) { throw 'Portable MSVC download/extraction failed. See the output above. Remove the failed Scoop install before retrying.' }"
+    ]
+  },
+  "bin": [
+    "portable-msvc.cmd",
+    "msvc-shell.cmd"
+  ],
+  "notes": [
+    "Run msvc-shell to open a CMD session configured for MSVC x64.",
+    "Run portable-msvc info to see the actual compiler and SDK versions.",
+    "Run portable-msvc run -- cl /? to run a command with the compiler environment.",
+    "In DevTools Studio > Development > Portable MSVC, choose the toolchain folder inside this package.",
+    "Scoop's version is the downloader version. Microsoft compiler/SDK versions are selected from the current stable catalog at install time.",
+    "Uninstall removes the Scoop-managed toolchain. Other existing MSVC installations are not used or changed."
+  ]
+}
