@@ -1,0 +1,56 @@
+{
+  "version": "1.1.0",
+  "description": "Portable MSVC 14.29 / Windows SDK 19041, with permanent user environment and version switching.",
+  "homepage": "https://visualstudio.microsoft.com/vs/features/cplusplus/",
+  "license": {
+    "identifier": "Proprietary",
+    "url": "https://visualstudio.microsoft.com/license-terms/"
+  },
+  "depends": "main/dotnet-sdk",
+  "architecture": {
+    "64bit": {
+      "url": "https://github.com/YOUR_USERNAME/scoop-devtools/releases/download/v1.1.0/portable-msvc-1.1.0.zip",
+      "hash": "44873a4d7bb12c68fb60e771b9de8c45078ae756c088c6b77a7a5996bdca9870"
+    }
+  },
+  "installer": {
+    "script": [
+      "Write-Host 'This package downloads Microsoft MSVC and Windows SDK under the Microsoft license terms:'",
+      "Write-Host 'https://visualstudio.microsoft.com/license-terms/'",
+      "& \"$dir\\portable-msvc.cmd\" install --accept-license --root \"$dir\\toolchain\" --host x64 --targets x64 --clean --compiler 14.29 --sdk 19041 --catalog-url 'https://download.visualstudio.microsoft.com/download/pr/4bc08c27-bd31-470c-9a30-3b62707fbf0f/5bd3b0b2ae509af2e9559b852f78545df0bf2c081dd850caed76f1dc134c511e/VisualStudio.vsman' --catalog-sha256 5bd3b0b2ae509af2e9559b852f78545df0bf2c081dd850caed76f1dc134c511e",
+      "if ($LASTEXITCODE -ne 0) { throw 'Portable MSVC download/extraction failed. See the output above. Remove the failed Scoop install before retrying.' }",
+      "$shellLauncher = \"@echo off`r`ncall `\"%~dp0portable-msvc.cmd`\" shell --root `\"%~dp0toolchain`\" %*`r`nexit /b %errorlevel%`r`n\"",
+      "[IO.File]::WriteAllText((Join-Path $dir \"msvc-version-shell.cmd\"), $shellLauncher, [Text.Encoding]::ASCII)"
+    ]
+  },
+  "bin": [
+    "portable-msvc.cmd",
+    "msvc-shell.cmd",
+    [
+      "msvc-version-shell.cmd",
+      "msvc-shell-14.29"
+    ]
+  ],
+  "notes": [
+    "Permanent user environment is configured for the active version. Reopen terminals.",
+    "Run portable-msvc list to see installed versions and portable-msvc use VERSION to switch.",
+    "Only the first installed version becomes active automatically; updating the active package refreshes its environment.",
+    "Run msvc-shell for the selected compiler, or use the version-specific developer-shell command.",
+    "Run portable-msvc info to see compiler and SDK versions.",
+    "Uninstall restores owned environment settings when unchanged. Removing the active version clears the active selection.",
+    "If uninstall removes shared command shims, use scoop reset on a remaining Portable MSVC package to restore them.",
+    "Scoop package versions identify the helper release; each manifest pins compiler/SDK selection and its Microsoft catalog URL."
+  ],
+  "pre_install": "if ($global) { throw 'Portable MSVC configures the current user. Install without --global.' }",
+  "post_install": [
+    "& \"$dir\\portable-msvc.cmd\" register --id \"$app\" --root \"$dir\\toolchain\" --host x64 --target x64",
+    "if ($LASTEXITCODE -ne 0) { throw 'Could not configure the permanent MSVC environment.' }"
+  ],
+  "uninstaller": {
+    "script": [
+      "$environmentAction = if ($subCommand -eq 'update') { 'suspend' } else { 'unregister' }",
+      "& \"$dir\\portable-msvc.cmd\" $environmentAction --id \"$app\"",
+      "if ($LASTEXITCODE -ne 0) { throw 'Could not restore the MSVC environment; uninstall has been stopped.' }"
+    ]
+  }
+}
