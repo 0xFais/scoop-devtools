@@ -8,7 +8,6 @@
             "hash": "153d5ff6c03ca1ece4e5cf087eb17cbd0b3aed62f63ce15716bde7090a8a4690"
         }
     },
-    "depends": "extras/windowsdesktop-runtime",
     "shortcuts": [
         [
             "TaskbarMonitor.App.exe",
@@ -17,7 +16,7 @@
     ],
     "persist": "Data",
     "notes": [
-        "Requires the .NET 10 Windows Desktop Runtime for x64; Scoop installs it from the extras bucket.",
+        "This package does not download or include .NET. The .NET 10 Windows Desktop Runtime for x64 must already be installed to run the app.",
         "CPU temperature setup may download PawnIO and request administrator approval."
     ],
     "checkver": "github",
