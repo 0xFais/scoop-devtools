@@ -9,7 +9,7 @@
     "depends": "main/dotnet-sdk",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/0xfais/scoop-devtools/releases/download/v1.1.0/portable-msvc-1.1.0.zip",
+            "url": "https://github.com/0xFais/msvc/releases/download/V1.1.0/msvc-1.1.0.zip",
             "hash": "44873a4d7bb12c68fb60e771b9de8c45078ae756c088c6b77a7a5996bdca9870"
         }
     },
@@ -39,7 +39,8 @@
         "Run portable-msvc info to see compiler and SDK versions.",
         "Uninstall restores owned environment settings when unchanged. Removing the active version clears the active selection.",
         "If uninstall removes shared command shims, use scoop reset on a remaining Portable MSVC package to restore them.",
-        "Scoop package versions identify the helper release; each manifest pins compiler/SDK selection and its Microsoft catalog URL."
+        "Scoop package versions identify the helper release; each manifest pins compiler/SDK selection and its Microsoft catalog URL.",
+        "For new installs, use the renamed package: scoop install msvc."
     ],
     "pre_install": "if ($global) { throw 'Portable MSVC configures the current user. Install without --global.' }",
     "post_install": [
