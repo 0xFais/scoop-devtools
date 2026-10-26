@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0",
+  "description": "Windows system and developer tools manager",
+  "homepage": "https://github.com/0xFais/DevTools-Project",
+  "architecture": {
+    "64bit": {
+      "url": "https://raw.githubusercontent.com/0xFais/DevTools-Project/main/releases/v1.0.0/DevTools-Studio-Windows.zip",
+      "hash": "7DEC5E54C802BB74DE04C2065B63C311D898373FFF17042536F26E3152D52E7E"
+    }
+  },
+  "bin": [
+    [
+      "DevTools.exe",
+      "devtools"
+    ]
+  ],
+  "shortcuts": [
+    [
+      "DevTools.exe",
+      "DevTools Studio"
+    ]
+  ],
+  "persist": "Data",
+  "notes": [
+    "Requires the .NET 10 Desktop Runtime (x64).",
+    "DevTools Studio requests administrator access at startup."
+  ]
+}
