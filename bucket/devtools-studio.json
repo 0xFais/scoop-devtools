@@ -4,7 +4,7 @@
   "homepage": "https://github.com/0xFais/DevTools-Project",
   "architecture": {
     "64bit": {
-      "url": "https://raw.githubusercontent.com/0xFais/DevTools-Project/main/releases/v1.1.0/DevTools-Studio-Windows.zip",
+      "url": "https://github.com/0xFais/DevTools-Project/releases/download/v1.1.0/DevTools-Studio-Windows.zip",
       "hash": "85f5aad54095c41684cd27d95d0e7768a7332ad55394b2f61f73c9a8bbc2ec9f"
     }
   },
