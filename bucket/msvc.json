@@ -1,59 +1,57 @@
 {
-    "version": "1.1.0",
-    "description": "MSVC 14.51 / Windows SDK 28000, with permanent user environment and version switching.",
-    "homepage": "https://github.com/0xFais/msvc",
-    "license": {
-        "identifier": "Proprietary",
-        "url": "https://visualstudio.microsoft.com/license-terms/"
-    },
-    "depends": "main/dotnet-sdk",
-    "architecture": {
-        "64bit": {
-            "url": "https://github.com/0xFais/msvc/releases/download/V1.1.0/msvc-1.1.0.zip",
-            "hash": "44873a4d7bb12c68fb60e771b9de8c45078ae756c088c6b77a7a5996bdca9870"
-        }
-    },
-    "installer": {
-        "script": [
-            "Write-Host 'This package downloads Microsoft MSVC and Windows SDK under the Microsoft license terms:'",
-            "Write-Host 'https://visualstudio.microsoft.com/license-terms/'",
-            "& \"$dir\\portable-msvc.cmd\" install --accept-license --root \"$dir\\toolchain\" --host x64 --targets x64 --clean --compiler 14.51 --sdk 28000 --catalog-url 'https://download.visualstudio.microsoft.com/download/pr/9a3f23c2-cc94-49a0-88c0-f9f19f2ac9df/b7aefeb168ba0be6c55db436328ef42f1800013146390350aed9ecb6d39f9bd6/VisualStudio.vsman' --catalog-sha256 976b2ce70dfe7d8d8ab349663ef14d8c4a29a8c3ec840b96e5d38e118e0a5379",
-            "if ($LASTEXITCODE -ne 0) { throw 'Portable MSVC download/extraction failed. See the output above. Remove the failed Scoop install before retrying.' }",
-            "$shellLauncher = \"@echo off`r`ncall `\"%~dp0portable-msvc.cmd`\" shell --root `\"%~dp0toolchain`\" %*`r`nexit /b %errorlevel%`r`n\"",
-            "[IO.File]::WriteAllText((Join-Path $dir \"msvc-version-shell.cmd\"), $shellLauncher, [Text.Encoding]::ASCII)"
-        ]
-    },
-    "bin": [
-        [
-            "portable-msvc.cmd",
-            "msvc"
-        ],
-        "msvc-shell.cmd",
-        [
-            "msvc-version-shell.cmd",
-            "msvc-shell-14.51"
-        ]
-    ],
-    "notes": [
-        "Permanent user environment is configured for the active version. Reopen terminals.",
-        "Run msvc list to see installed versions and msvc use VERSION to switch.",
-        "Only the first installed version becomes active automatically; updating the active package refreshes its environment.",
-        "Run msvc-shell for the selected compiler, or use the version-specific developer-shell command.",
-        "Run msvc info to see compiler and SDK versions.",
-        "Uninstall restores owned environment settings when unchanged. Removing the active version clears the active selection.",
-        "If uninstall removes shared command shims, use scoop reset on a remaining MSVC package to restore them.",
-        "Scoop package versions identify the helper release; each manifest pins compiler/SDK selection and its Microsoft catalog URL."
-    ],
-    "pre_install": "if ($global) { throw 'Portable MSVC configures the current user. Install without --global.' }",
-    "post_install": [
-        "& \"$dir\\portable-msvc.cmd\" register --id \"$app\" --root \"$dir\\toolchain\" --host x64 --target x64",
-        "if ($LASTEXITCODE -ne 0) { throw 'Could not configure the permanent MSVC environment.' }"
-    ],
-    "uninstaller": {
-        "script": [
-            "$environmentAction = if ($subCommand -eq 'update') { 'suspend' } else { 'unregister' }",
-            "& \"$dir\\portable-msvc.cmd\" $environmentAction --id \"$app\"",
-            "if ($LASTEXITCODE -ne 0) { throw 'Could not restore the MSVC environment; uninstall has been stopped.' }"
-        ]
+  "version": "1.1.0",
+  "description": "MSVC 14.51 / Windows SDK 28000, with permanent user environment and version switching.",
+  "homepage": "https://visualstudio.microsoft.com/vs/features/cplusplus/",
+  "license": {
+    "identifier": "Proprietary",
+    "url": "https://visualstudio.microsoft.com/license-terms/"
+  },
+  "depends": "main/dotnet-sdk",
+  "architecture": {
+    "64bit": {
+      "url": "https://raw.githubusercontent.com/0xFais/msvc/main/releases/msvc-1.1.0.zip",
+      "hash": "823f98dc09f8e3360cd87e1f7159915a5b5d9ae566239538bc8db75f832c40d2"
     }
+  },
+  "installer": {
+    "script": [
+      "Write-Host 'This package downloads Microsoft MSVC and Windows SDK under the Microsoft license terms:'",
+      "Write-Host 'https://visualstudio.microsoft.com/license-terms/'",
+      "& \"$dir\\msvc.cmd\" install --accept-license --root \"$dir\\toolchain\" --host x64 --targets x64 --clean --compiler 14.51 --sdk 28000 --catalog-url 'https://download.visualstudio.microsoft.com/download/pr/9a3f23c2-cc94-49a0-88c0-f9f19f2ac9df/b7aefeb168ba0be6c55db436328ef42f1800013146390350aed9ecb6d39f9bd6/VisualStudio.vsman' --catalog-sha256 976b2ce70dfe7d8d8ab349663ef14d8c4a29a8c3ec840b96e5d38e118e0a5379",
+      "if ($LASTEXITCODE -ne 0) { throw 'MSVC download/extraction failed. See the output above. Remove the failed Scoop install before retrying.' }",
+      "$shellLauncher = \"@echo off`r`ncall `\"%~dp0msvc.cmd`\" shell --root `\"%~dp0toolchain`\" %*`r`nexit /b %errorlevel%`r`n\"",
+      "[IO.File]::WriteAllText((Join-Path $dir \"msvc-version-shell.cmd\"), $shellLauncher, [Text.Encoding]::ASCII)"
+    ]
+  },
+  "bin": [
+    "msvc.cmd",
+    "msvc-shell.cmd",
+    [
+      "msvc-version-shell.cmd",
+      "msvc-shell-14.51"
+    ]
+  ],
+  "notes": [
+    "Permanent user environment is configured for the active version. Reopen terminals.",
+    "Run msvc list to see installed versions and msvc use VERSION to switch.",
+    "Only the first installed version becomes active automatically; updating the active package refreshes its environment.",
+    "Run msvc-shell for the selected compiler, or use the version-specific developer-shell command.",
+    "Run msvc info to see compiler and SDK versions.",
+    "Uninstall restores owned environment settings when unchanged. Removing the active version clears the active selection.",
+    "If uninstall removes shared command shims, use scoop reset on a remaining MSVC package to restore them.",
+    "Scoop package versions identify the helper release; each manifest pins compiler/SDK selection and its Microsoft catalog URL."
+  ],
+  "pre_install": "if ($global) { throw 'MSVC configures the current user. Install without --global.' }",
+  "post_install": [
+    "& \"$dir\\msvc.cmd\" register --id \"$app\" --root \"$dir\\toolchain\" --host x64 --target x64",
+    "if ($LASTEXITCODE -ne 0) { throw 'Could not configure the permanent MSVC environment.' }"
+  ],
+  "uninstaller": {
+    "script": [
+      "$environmentAction = if ($subCommand -eq 'update') { 'suspend' } else { 'unregister' }",
+      "& \"$dir\\msvc.cmd\" $environmentAction --id \"$app\"",
+      "if ($LASTEXITCODE -ne 0) { throw 'Could not restore the MSVC environment; uninstall has been stopped.' }"
+    ]
+  }
 }
+
