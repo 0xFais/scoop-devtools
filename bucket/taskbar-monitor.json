@@ -26,5 +26,11 @@
                 "url": "https://github.com/0xFais/Taskbar-monitor/releases/download/v$version/Taskbar-monitor-portable-framework-dependent-win-x64.zip"
             }
         }
-    }
+    },
+    "bin": [
+        [
+            "TaskbarMonitor.App.exe",
+            "taskbar-monitor"
+        ]
+    ]
 }
