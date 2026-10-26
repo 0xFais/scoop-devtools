@@ -1,0 +1,31 @@
+{
+    "version": "1.0.0",
+    "description": "Fluent Desk system monitor with a customizable Windows taskbar panel",
+    "homepage": "https://github.com/0xFais/Taskbar-monitor",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/0xFais/Taskbar-monitor/releases/download/v$version/Taskbar-monitor-portable-framework-dependent-win-x64.zip",
+            "hash": "153d5ff6c03ca1ece4e5cf087eb17cbd0b3aed62f63ce15716bde7090a8a4690"
+        }
+    },
+    "depends": "extras/windowsdesktop-runtime",
+    "shortcuts": [
+        [
+            "TaskbarMonitor.App.exe",
+            "Taskbar Monitor"
+        ]
+    ],
+    "persist": "Data",
+    "notes": [
+        "Requires the .NET 10 Windows Desktop Runtime for x64; Scoop installs it from the extras bucket.",
+        "CPU temperature setup may download PawnIO and request administrator approval."
+    ],
+    "checkver": "github",
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://github.com/0xFais/Taskbar-monitor/releases/download/v$version/Taskbar-monitor-portable-framework-dependent-win-x64.zip"
+            }
+        }
+    }
+}
