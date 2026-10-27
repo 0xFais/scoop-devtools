@@ -1,11 +1,11 @@
 {
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Fluent Desk system monitor with a customizable Windows taskbar panel",
     "homepage": "https://github.com/0xFais/Taskbar-monitor",
     "architecture": {
         "64bit": {
-            "url": "https://github.com/user-attachments/files/33985061/Taskbar-monitor-portable-framework-dependent-win-x64.zip",
-            "hash": "9c05af8b9327242fe0285fad84c10bb7a9561aca29e2c352bc20c0402a7a95a8"
+            "url": "https://github.com/0xFais/Taskbar-monitor/releases/download/v1.0.2/Taskbar-monitor-portable-framework-dependent-win-x64-v1.0.2.zip",
+            "hash": "f6beffb81bd30edab54302508bf8849a686cd4bcc70d8f3edfc3dcc3007ddd7a"
         }
     },
     "shortcuts": [
@@ -23,7 +23,7 @@
     "autoupdate": {
         "architecture": {
             "64bit": {
-                "url": "https://github.com/0xFais/Taskbar-monitor/releases/download/v$version/Taskbar-monitor-portable-framework-dependent-win-x64.zip"
+                "url": "https://github.com/0xFais/Taskbar-monitor/releases/download/v$version/Taskbar-monitor-portable-framework-dependent-win-x64-v$version.zip"
             }
         }
     },
