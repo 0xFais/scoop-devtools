@@ -8,5 +8,11 @@
       "url": "https://github.com/0xFais/ScoopNest/releases/download/v1.0.0/ScoopNest-portable-win-x64-with-runtimes.zip",
       "hash": "b95407231a87bf21fd80dee43e46684a1f8f2da36f2e826fbe157d842ae6f296"
     }
-  }
+  },
+  "shortcuts": [
+    [
+      "ScoopNest.exe",
+      "ScoopNest"
+    ]
+  ]
 }
